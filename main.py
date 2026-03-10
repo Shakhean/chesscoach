@@ -19,7 +19,6 @@ def coords_to_square(row, col):
     return (7 - row) * 8 + col
 
 def build_board():
-    # Determine square size dynamically based on page width/height
     if page_instance and page_instance.width and page_instance.height:
         board_size = min(page_instance.width * 0.9, page_instance.height * 0.7)
         square_size = board_size / 8
@@ -45,16 +44,16 @@ def build_board():
             symbol = piece_symbols.get(piece.symbol(), "") if piece else ""
             
             # Square colors
-            color = ft.colors.WHITE if (row + col) % 2 == 0 else ft.colors.GREY_400
-            if square == selected_square:
-                color = ft.colors.YELLOW_200
-            elif square in legal_squares:
-                color = ft.colors.GREEN_200
+            color = ft.Colors.WHITE if (row + col) % 2 == 0 else ft.Colors.GREY_400
             
-            # Optional border highlight
+            if square == selected_square:
+                color = ft.Colors.YELLOW_200
+            elif square in legal_squares:
+                color = ft.Colors.GREEN_200
+            
             border = None
             if square == selected_square or square in legal_squares:
-                border = ft.border.all(2, ft.colors.BLUE_400)
+                border = ft.border.all(2, ft.Colors.BLUE_400)
             
             square_container = ft.Container(
                 content=ft.Text(
@@ -129,11 +128,9 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.padding = 10
     
-    # Remove fixed window sizes for mobile responsiveness
     page.window_width = None
     page.window_height = None
     
-    # Listen to resize events
     page.on_resized = page_resize
     
     page.add(
