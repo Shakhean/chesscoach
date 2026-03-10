@@ -29,7 +29,7 @@ jobs:
         flet build apk main.py --release --output build/chess_flet_app.apk
 
     - name: Upload APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: chess-flet-apk
         path: build/chess_flet_app.apk
